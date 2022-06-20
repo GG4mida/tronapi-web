@@ -142,6 +142,7 @@ export async function getInitialState(): Promise<{
     telegram,
     user_faucet_amount,
     user_withdrawal_min_amount,
+    merchant_transaction_expire_second,
   } = await fetchSystemInfo();
 
   const theme = Storage.getItem(STORAGE_KEY.THEME);
@@ -154,6 +155,7 @@ export async function getInitialState(): Promise<{
       telegram,
       user_faucet_amount,
       user_withdrawal_min_amount,
+      merchant_transaction_expire_second,
     },
     navTheme: theme || 'dark',
   };

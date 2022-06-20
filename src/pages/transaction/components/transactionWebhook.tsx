@@ -1,6 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'umi';
-import { Descriptions, Tag, Divider, Space, Button, message } from 'antd';
+import {
+  Descriptions,
+  Tag,
+  Popconfirm,
+  Divider,
+  Space,
+  Button,
+  message,
+} from 'antd';
 import ITransaction from '@/types/ITransaction';
 import { formatDateTime, formatJson } from '@/utils/formater';
 import { COLOR } from '@/configs/enum';
@@ -88,9 +96,20 @@ const TransactionWebhook: React.FC<IProps> = (props) => {
         </Descriptions.Item>
         <Descriptions.Item label="操作">
           <Space>
-            <Button type="primary" loading={loading} onClick={onSendWebhook}>
-              重发
-            </Button>
+            <Popconfirm
+              title={
+                <div>
+                  <h4>确认重发回调通知吗？</h4>
+                </div>
+              }
+              okText="确认"
+              cancelText="取消"
+              onConfirm={onSendWebhook}
+            >
+              <Button type="primary" loading={loading}>
+                重发
+              </Button>
+            </Popconfirm>
           </Space>
         </Descriptions.Item>
       </Descriptions>

@@ -28,6 +28,8 @@ const FormCreate: React.FC<IProps> = (props) => {
   const [form] = Form.useForm();
   const { visible } = props;
 
+  const { config }: any = initialState?.settings;
+
   const handleSuccess = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
@@ -58,9 +60,21 @@ const FormCreate: React.FC<IProps> = (props) => {
           handleSuccess();
           props.onSuccess();
         }
+      } else {
+        handleReset();
       }
     };
-    const timer = setInterval(queryHandler, 1000);
+
+    let counter = 1;
+    const timer = setInterval(() => {
+      if (counter * 3 < config.merchant_transaction_expire_second) {
+        queryHandler();
+      } else {
+        handleReset();
+      }
+      counter++;
+    }, 3000);
+
     queryTimerRef.current = timer;
   };
 

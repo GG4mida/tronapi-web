@@ -18,8 +18,6 @@
 
 <img width="100%" src="https://github.com/GG4mida/tronapi-web/blob/master/screenshot/home.png?raw=true"/>
 
-<img width="100%" src="https://github.com/GG4mida/tronapi-web/blob/master/screenshot/transaction.png?raw=true"/>
-
 ## 🍊 链接
 
 - [Tronapi Pro 接口文档](https://doc.tronapi.com)

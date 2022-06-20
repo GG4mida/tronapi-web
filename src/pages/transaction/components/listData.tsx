@@ -102,7 +102,7 @@ const columns = [
           <div
             className="tw-truncate"
             style={{
-              width: '200px',
+              width: '120px',
             }}
           >
             {val}

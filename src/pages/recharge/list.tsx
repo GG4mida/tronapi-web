@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Spin, Button } from 'antd';
+import { Spin, Button, Divider } from 'antd';
 import { useDispatch, useSelector } from 'umi';
 import ContentHeader from '@/components/contentHeader';
 import { RechargeModelState } from '@/models/recharge';
@@ -89,6 +89,14 @@ const RechargeListPage: React.FC = () => {
             onPageChange={onPageChange}
           />
         </Spin>
+
+        <Divider dashed />
+        <div>
+          <h3>说明</h3>
+          <ol>
+            <li>如需要退款，请联系客服。</li>
+          </ol>
+        </div>
       </div>
       <FormCreate
         visible={formVisible}

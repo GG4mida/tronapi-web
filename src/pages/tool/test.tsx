@@ -30,6 +30,8 @@ const ToolTestPage: React.FC = () => {
   const [queryTimer] = useState<any>(null);
   const queryTimerRef = useRef(queryTimer);
 
+  const { config }: any = initialState?.settings;
+
   const handleReset = () => {
     if (queryTimerRef.current) {
       clearInterval(queryTimerRef.current);
@@ -66,14 +68,21 @@ const ToolTestPage: React.FC = () => {
           });
 
           handleSuccess();
-
-          setQueryLoading(false);
-          setButtonText('提交');
-          clearInterval(queryTimerRef.current);
+          handleReset();
         }
+      } else {
+        handleReset();
       }
     };
-    const timer = setInterval(queryHandler, 1000);
+    let counter = 1;
+    const timer = setInterval(() => {
+      if (counter * 3 < config.merchant_transaction_expire_second) {
+        queryHandler();
+      } else {
+        handleReset();
+      }
+      counter++;
+    }, 3000);
     queryTimerRef.current = timer;
   };
 
@@ -82,12 +91,10 @@ const ToolTestPage: React.FC = () => {
       .validateFields()
       .then(async (values) => {
         handleReset();
-
         const res: any = await dispatch({
           type: 'system/createTestTransaction',
           payload: values,
         });
-
         if (res && res.success === true) {
           const { id, cashier_url } = res.data;
           handleQuery(id);

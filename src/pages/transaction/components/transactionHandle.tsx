@@ -41,7 +41,10 @@ const TransactionHandle: React.FC<IProps> = (props) => {
       .then(async (values) => {
         const res: any = await dispatch({
           type: 'transaction/search',
-          payload: values,
+          payload: {
+            ...values,
+            id: data.id,
+          },
         });
         if (res && res.success === true) {
           if (res.data && res.data.length) {
